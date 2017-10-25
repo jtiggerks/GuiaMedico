@@ -96,12 +96,12 @@
                 <div id="endereco"></div>
             </div>
 
-            <div class="boxlinha">
+            <div class="boxlinha" id="div_especialidade">
                 <div style="float: left;">
                     <i class="fa fa-level-up" aria-hidden="true"></i>
                 </div>
 
-                <div><b>Especialidade:</b><br><div id="especialidade"></div></div>
+                <div><div id="especialidade"></div></div>
             </div>
             <div class="boxlinha">   
                 <div style="float: left;">
@@ -111,7 +111,7 @@
                 <div id="telefone2"></div>
             </div>   
             
-            <div class="boxlinha">  
+            <div class="boxlinha" id="div_descricao">  
                 <div style="float: left;">
                     <i class="fa fa-address-book" aria-hidden="true"></i>
                 </div>                      
@@ -245,12 +245,29 @@
                         $.each( response, function ( i, val ) {
                             
                              $('.titulo-header').html('<i rel="categoria_page" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
-                             $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+'</a>');
-                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+'</a>');
+                             $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+' (Ver mapa)</a>');
+                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+' (Ligar)</a>');
                              $('#telefone2').empty().html(val.telefone2);
-                             $('#descricao').empty().html(val.descricao);
-                             $('#especialidade').empty().html(val.especialidade);
+                             
+                             
 
+                             if(val.descricao != null)
+                             {
+                                $('#descricao').empty().html(val.descricao);
+                                $('#div_descricao').show();
+                             }else
+                             {
+                                $('#div_descricao').hide();
+                             }
+
+                             if(val.especialidade != '')
+                             {
+                                $('#especialidade').empty().html('<b>Especialidade:</b><br>'+val.especialidade);
+                                $('#div_especialidade').show();
+                             }else
+                             {
+                                $('#div_especialidade').hide();
+                             }
 
                         });
                     });
