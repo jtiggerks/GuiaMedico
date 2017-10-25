@@ -1,0 +1,79 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-phonecaller": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "br.com.guiamedicolins"
+        }
+    }
+}

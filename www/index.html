@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link href="css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+ 
+
+    <title>Guia Médico</title>
+</head>
+
+<body>
+<input type="hidden" id="pagina-atual" name="home">
+<input type="hidden" id="categoria-atual" name="categoria">
+
+ <div class="header">
+     <div class="menu-controls">
+        <a href="#" class="open-menu"><i class="fa fa-navicon"></i></a>
+    </div>
+    <h2>GUIA MÉDICO DE LINS</h2> 
+ </div>
+
+ <div class="all-elements">
+
+     <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-left">  
+                <ul class="sidebar-navigation" id="id_menu"> 
+
+                </ul>   
+            </div>  
+
+            <div class="snap-drawer snap-drawer-right">        
+                
+            
+                
+                <div id="resultado">
+                </div>
+
+            </div>
+    </div>
+
+    <div id="content" class="snap-content bg-guiamedico">
+
+    <div id="home">        
+        <div id="centro_app_home">
+            <form>
+                <input type="text" class="text_class" id="busca_medico" placeholder="Busque aqui seu Médico" /> 
+                <!--<button type="submit" class="btn btn-busca">
+                    <i class="fa fa-search" aria-hidden="true"></i>  
+                </button> 
+                -->
+            </form> 
+        </div>
+        <div style="clear: both; width: 100%;"></div>
+        <ul id="autocomplete" class="lista_resultado" data-role="listview" data-inset="true" data-filter="true"data-filter-theme="d"></ul>
+
+        
+        <div id="box_menu_centro">
+
+
+
+        </div>
+
+    </div>
+
+     <div id="medico_detalhes" style="display: none">  
+            
+            <div class="titulo-header"></div> 
+ 
+            <img src="24c479ee2b3dc1a7acca50cbd5e83f6005medico1.jpg" />
+            
+            <div class="boxlinha">
+                <div style="float: left;">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </div>
+
+                <div id="endereco"></div>
+            </div>
+
+            <div class="boxlinha">
+                <div style="float: left;">
+                    <i class="fa fa-level-up" aria-hidden="true"></i>
+                </div>
+
+                <div><b>Especialidade:</b><br><div id="especialidade"></div></div>
+            </div>
+            <div class="boxlinha">   
+                <div style="float: left;">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>                     
+                <div id="telefone1"></div>
+                <div id="telefone2"></div>
+            </div>   
+
+            <div class="boxlinha">  
+                <div style="float: left;">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                </div>                      
+                <div id="descricao"></div>
+            </div>
+
+
+
+     </div>
+
+     <div id="categoria_page" style="display: none">  
+            <div class="titulo-header"></div> 
+            <ul id="lista_medico"  class="lista_resultado" data-role="listview" ></ul>
+
+     </div>
+
+
+ </div>
+    <script type="text/javascript" src="js/jquery.js"></script> 
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/Snap.js"></script> 
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+
+    </script>
+    <script>
+
+        $(function () {
+
+            $('.titulo-header i').live('click',function(e)
+            { 
+                    var hideDeffered = $('#home, #categoria_page, #medico_detalhes').hide();
+                    hideDeffered.promise().done(function() {});
+                    $('.titulo-header').html('<i rel="home" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div style=''>"+$('#categoria-atual').val()+"</div>");
+                    $('#'+$(this).attr('rel')).show();
+            });
+
+            var conteudohtml_centro = '';
+            
+            $.ajax({
+                url: "http://acelins.com.br/ap/categorias.php",
+                dataType: "json",
+                crossDomain: true
+            })
+            .then( function ( response ) {
+                $.each( response, function ( i, val ) {
+                    if(val != '')
+                    {
+                        conteudohtml_centro += "<a class='class_categoria' rel2='" + val.nome + "' rel='"+ val.id +"'><i class='fa " + val.faicon + "' aria-hidden='true'></i> " + val.nome + "</a>";
+                    }else
+                    {
+                        conteudohtml_centro = "";
+                    }                            
+                });
+
+                 $('#box_menu_centro').html(conteudohtml_centro); 
+                
+            });
+
+            $('.class_categoria').live('click',function(e)
+            {                    
+                    rel = this.rel;
+                    rel2 = $(this).attr('rel2');
+                    var html = '';
+                    $('#pagina-atual').val('categoria_page'); 
+                    $('#categoria-atual').val(rel2);
+
+
+                    var $ul =  $("#lista_medico");
+                    $.ajax({
+                        url: "http://www.acelins.com.br/ap/porcategoria.php",
+                        dataType: "json",
+                        crossDomain: true,
+                        data: {
+                            q: rel
+                        }
+                    })
+                    .then( function ( response ) {
+                        $.each( response, function ( i, val ) {
+
+                            if(val != '')
+                            {
+                                html += "<li>" + val.descricao + "</li>";
+                            }else
+                            {
+                               html = "<li>Nenhum resultado encontrado por '"+rel2+"'</li>";
+                            }                            
+                        });
+
+                        $ul.html(html); 
+                        
+                    });
+
+
+                    var hideDeffered = $('#home, #medico_detalhes').hide();
+                    hideDeffered.promise().done(function() {
+                        $('.titulo-header').html('<i rel="home" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div style=''>"+rel2+"</div>");
+                        $('#categoria_page').show();
+                    });
+            });
+
+
+
+            $('.div_list_medico').live('click',function(e){
+                    $('.titulo-header').html('');
+                    rel = this.rel;
+                    var nomemedico,endereco,foto,especialidade;
+
+                    var voltarpara= $('#pagina-atual').val();
+
+                    $('#pagina-atual').val('medico_detalhes');          
+                    var hideDeffered = $('#home,#categoria_page').hide();
+                    hideDeffered.promise().done(function() {
+                        $('#medico_detalhes').show();
+                    });
+
+
+                    $.ajax({
+                        url: "http://www.acelins.com.br/ap/detalhemedico.php",
+                        dataType: "json",
+                        crossDomain: true,
+                        data: {
+                            q: rel
+                        }
+                    })
+                    .then( function ( response ) {
+                        $.each( response, function ( i, val ) {
+                            
+                             $('.titulo-header').html('<i rel="categoria_page" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
+                             $('#endereco').empty().html(val.endereco);
+                             $('#telefone1').empty().html('<a href="tel:1435236805">'+val.telefone1+'</a>');
+                             $('#telefone2').empty().html(val.telefone2);
+                             $('#descricao').empty().html(val.descricao);
+                             $('#especialidade').empty().html(val.especialidade);
+
+
+                        });
+                    });
+
+   
+            });
+ 
+
+            $("#busca_medico").keyup( function ( e, data ) {
+               
+                    var $ul =  $("#autocomplete"),
+                    $input = $(this),
+                    value = $input.val(),
+                    html = "";
+ 
+
+                    $ul.html( "" );
+
+
+                if ( value && value.length > 2 ) {
+                    
+                    $.ajax({
+                        url: "http://www.acelins.com.br/ap/search.php",
+                        dataType: "json",
+                        crossDomain: true,
+                        data: {
+                            q: $input.val()
+                        }
+                    })
+                    .then( function ( response ) {
+                        $.each( response, function ( i, val ) {
+                            if(val != '')
+                            {
+                                html += "<li>" + val.descricao + "</li>";
+                            }else
+                            {
+                               html = "<li>Nenhum resultado encontrado por '"+$input.val()+"'</li>";
+                            }                            
+                        });
+
+                        $ul.html(html); 
+                        
+                    });
+                }
+            });
+
+
+
+
+
+        });
+
+ 
+    </script>
+
+
+</body>
+
+</html>

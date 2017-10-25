@@ -1,0 +1,633 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+@font-face {
+ font-family: 'GothamBlackRegular';
+ src: url('../fonts/gotham-black-webfont.eot');
+ src: url('../fonts/gotham-black-webfont.eot?#iefix') format('embedded-opentype'),  url('../fonts/gotham-black-webfont.woff') format('woff'),  url('../fonts/gotham-black-webfont.ttf') format('truetype'),  url('../fonts/gotham-black-webfont.svg#GothamBlackRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'GothamBookRegular';
+ src: url('../fonts/gotham-book-webfont.eot');
+ src: url('../fonts/gotham-book-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/gotham-book-webfont.woff') format('woff'), url('../fonts/gotham-book-webfont.ttf') format('truetype'), url('../fonts/gotham-book-webfont.svg#GothamBookRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'GothamMediumRegular';
+ src: url('../fonts/gotham-medium-webfont.eot');
+ src: url('../fonts/gotham-medium-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/gotham-medium-webfont.woff') format('woff'), url('../fonts/gotham-medium-webfont.ttf') format('truetype'), url('../fonts/gotham-medium-webfont.svg#GothamMediumRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'GothamBoldRegular';
+ src: url('../fonts/gotham-bold-webfont.eot');
+ src: url('../fonts/gotham-bold-webfont.eot?#iefix') format('embedded-opentype'),  url('../fonts/gotham-bold-webfont.woff') format('woff'),  url('../fonts/gotham-bold-webfont.ttf') format('truetype'),  url('../fonts/gotham-bold-webfont.svg#GothamBoldRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+
+
+body{font-family: 'GothamMediumRegular';}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'GothamMediumRegular';
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'GothamMediumRegular';
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: 'GothamMediumRegular';
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'GothamMediumRegular';
+}
+
+
+.sidebar-navigation{ padding: 0; }
+
+.sidebar-divider{
+    background-color:#FFF;
+    height:30px;
+    font-size:10px;
+  
+    text-transform:uppercase;
+    font-weight:800;
+    color:#636464;
+    border-bottom:solid 1px rgba(255,255,255,0.1);
+    border-top:solid 1px rgba(255,255,255,0.1);
+    line-height:30px;
+    padding-left:30px;
+}
+
+.sidebar-navigation{
+    margin-bottom:-1px;
+}
+
+.sidebar-navigation li{
+    position:relative;
+    overflow:hidden;
+    display:block;
+    list-style:none;
+    line-height:60px;
+    border-bottom:solid 1px rgba(255,255,255,0.05);
+    margin-bottom:0px;
+}
+
+.sidebar-navigation li:hover{
+    background-color:rgba(255,255,255,0.05);
+}
+
+.sidebar-navigation li a{
+    padding-left:70px;
+    color:#FFFFFF;
+ 
+    transition:all 350ms ease;
+}
+
+.sidebar-navigation li a i:first-child{
+    position:absolute;
+    height:60px;
+    width:60px;
+    line-height:60px;
+    text-align:center;
+    left:10px;
+    font-size:21px;
+    color:#bcbdbd;
+}
+
+.sidebar-navigation li a i:last-child{
+    position:absolute;
+    height:60px;
+    width:60px;
+    text-align:center;
+    line-height:60px;
+    font-size:4px;
+    color:#bcbdbd;
+    left:205px;
+}
+
+.sidebar-navigation li .fa-caret-right{
+    font-size:10px!important;
+}
+
+.sidebar-navigation li .fa-mobile{
+    font-size:27px!important;
+}
+
+
+/*SLide Menu*/
+
+
+.all-elements{
+  background:#FFC132;
+  position:absolute;
+  overflow-x:hidden!important;  
+  width:100%;
+  height:100%;
+  min-height:100%;
+  max-height:100%;
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+ 
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+}
+
+/*Page Header*/
+#content{
+    padding-top:50px;
+}
+
+.header-clear{
+    height:30px;
+}
+
+.header{
+    pointer-events:all;
+    position:fixed;
+    height:50px;
+    z-index:999999;
+    background-color:#0099eb !important;
+    width:100%;
+    max-height:100%;
+    transform:translateY(0px);
+    -webkit-transform:translateY(0px);
+    transition:all 350ms ease-in-out;
+    text-align:center;
+}
+
+ 
+
+.header #voltar-header
+{
+    position: absolute;
+    margin-left: 60px;
+    margin-top: -26px;
+    display:none;
+}
+
+#voltar-header img{
+    width: 19px;
+}
+
+.hide-header-left{
+    pointer-events:none!important;
+    transform:translateX(266px)!important;
+    -webkit-transform:translateX(266px)!important;
+    transition:all 350ms ease-in-out;
+}
+
+.hide-header-right{
+    pointer-events:none!important;
+    transform:translateX(-266px)!important;
+    -webkit-transform:translateX(-266px)!important;
+    transition:all 350ms ease-in-out;
+}
+
+.header a:hover{
+    color:#1f1f1f;
+}
+
+.header a i{
+    color:white !important
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); 
+    transform: rotate(0deg);
+    -webkit-transition: all 250ms ease!important;
+    transition:all 250ms ease!important;
+}
+.menu-controls{
+    float: left;    
+}
+.header-controls, .menu-controls{
+    margin-top: -2px;
+}
+
+.header-controls{
+    float:right;
+    display:none;   
+    margin-right: 10px;
+}
+
+
+
+.open-menu{
+    float: right;
+    width: 60px;
+    height: 60px;
+    line-height: 53px;
+    font-size: 20px;
+    text-align: center;
+    color: #FFF;
+    border-right: none;
+}
+
+.open-slide{
+    float:right;
+    width:60px;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    text-align:center;
+    color:#1f1f1f;
+    border-right:dashed 1px #cacaca;
+}
+
+
+
+/* Sidebar Menu Structures */
+/* DO NOT CHANGE!*/
+/* The code is calibrated perfectly for all mobiles*/
+
+
+/*Sidebar Generated Code*/
+/*Custom Code*/
+.snap-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+       -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.snap-drawers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  overflow-x:hidden;
+}
+
+.snap-drawer {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  width: 275px;
+  height: auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: width 0.3s ease;
+     -moz-transition: width 0.3s ease;
+      -ms-transition: width 0.3s ease;
+       -o-transition: width 0.3s ease;
+          transition: width 0.3s ease;
+}
+
+.snap-drawer-left {
+  left: 0;
+  z-index: 1;
+}
+
+.snap-drawer-right {
+  right: 0;
+  z-index: 1;
+}
+
+.snapjs-left .snap-drawer-right,
+.snapjs-right .snap-drawer-left {
+  display: none;
+}
+
+.snapjs-expand-left .snap-drawer-left,
+.snapjs-expand-right .snap-drawer-right {
+  width: 100%;
+}
+
+.snapjs-right .snap-drawer-left {
+    display: block;
+    right: 0;
+    left: auto;
+}
+
+/* Hide the actual "Right" drawer in the demo */
+.snapjs-right .snap-drawer-right {
+    display: block !important;
+    right: 0  !important;
+    left: auto  !important;
+}
+
+/*Snap.CSS*/
+
+.snap-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+       -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.snap-drawers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+
+.snap-drawer {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  width: 286px;
+  height: auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: width 0.3s ease;
+     -moz-transition: width 0.3s ease;
+      -ms-transition: width 0.3s ease;
+       -o-transition: width 0.3s ease;
+          transition: width 0.3s ease;
+}
+
+.snap-drawer-left {
+  left: 0;
+  z-index: 1;
+}
+
+.snap-drawer-right {
+  right: 0;
+  z-index: 1;
+  padding-left:20px;
+}
+
+.snapjs-left .snap-drawer-right,
+.snapjs-right .snap-drawer-left {
+  display: none;
+}
+
+.snapjs-expand-left .snap-drawer-left,
+.snapjs-expand-right .snap-drawer-right {
+  width: 100%;
+}
+
+/* Hide the actual "Right" drawer in the demo */
+.snapjs-right .snap-drawer-right {
+    display: none;
+}
+
+/* Show the "Drag" background in the demo */
+#content {
+    background-color:#FFFFFF;
+    overflow-x:hidden;
+}
+
+/* Styles for fading out the drawer content in the "Expanding" demo */
+.drawer-inner {
+    -webkit-transition: opacity 0.3s ease; 
+       -moz-transition: opacity 0.3s ease; 
+        -ms-transition: opacity 0.3s ease; 
+         -o-transition: opacity 0.3s ease; 
+            transition: opacity 0.3s ease; 
+}
+
+.snapjs-expand-left .drawer-inner,
+.snapjs-expand-right .drawer-inner {
+    opacity: 0;
+}
+
+
+/* Default demo styles */
+
+.snap-drawers {
+    margin-top: 50px;
+    background-image:url(../imagens/menu-bg.png);
+    background-size:100px 100px;
+}
+
+.snap-drawer {
+    background-image:url(../imagens/menu-bg.png);
+    background-size:100px 100px;
+}
+
+.no-user-select{  
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;  
+}
+
+
+#centro_app_home
+{
+    padding: 1%;
+    display: inline-block;
+    background-color: rgba(0, 160, 236, 0.09);
+    clear: both;
+    width: 98%;
+}
+
+.text_class
+{
+    height: 30px;
+    width: 98%;
+    padding: 1%;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    float: left;
+
+}
+.btn
+{
+    background: transparent;
+    border: 0;
+    float: left;
+}
+
+.btn-busca
+{
+  width: 6%;
+  float: left;
+  text-align: right;
+}
+
+.btn-busca i
+{
+      font-size: 30px;
+      border: 0;
+      color: #00a0ec;
+}
+
+.lista_resultado
+{
+    padding-left: 0;
+}
+
+.lista_resultado li{
+    list-style: none;
+    padding-bottom: 20px;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-bottom: solid 2px #fff;
+}
+
+.lista_resultado li:hover{
+  background-color: #ecf8fd;
+}
+
+.div_list_medico{
+  display: inline-block;
+  text-decoration: none;
+}
+
+.div_list_medico h1
+{
+  color: #00a0ec;
+  font-size: 14px;
+}
+
+
+.titulo-header{
+    text-align: center;
+    padding: 10px;
+    background-color: #115a7d;
+    color: #fff;
+    font-size: 18pt;
+
+}
+#box_menu_centro{
+
+  text-align: center;
+
+}
+
+#box_menu_centro a
+{
+    background-color: #309bce;
+    display: inline-grid;
+    cursor: pointer;
+
+
+    margin: 15px;
+    width: 120px;
+    height: 120px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 14px;
+    font-size: 14px; 
+}
+
+
+#box_menu_centro a:hover{
+
+    background: -webkit-linear-gradient(#00a0ec,#5B798E);  
+    background: -moz-linear-gradient(#00a0ec,#5B798E);  
+    background: -o-linear-gradient(#00a0ec,#5B798E);  
+    background: linear-gradient(#00a0ec,#5B798E);  
+
+    -webkit-transition: background 1s ease-out;  
+    -moz-transition: background 1s ease-out;  
+    -o-transition: background 1s ease-out;  
+    transition: background 1s ease-out;  
+
+    background-size:1px 200px;  
+
+
+}
+#box_menu_centro i
+{
+    font-size: 50px;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+i.fa.fa-arrow-left
+{
+  float: left;
+}
+
+.header h2{
+    color: #fff;
+    font-size: 17pt;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: -50px;
+    text-align: center;  
+}
+
+.boxlinha
+{
+    padding: 30px;
+    background-color: #fafcfd;
+    font-size: 13pt;
+    color: #333;
+}
+.boxlinha div i {margin-right: 20px;}
