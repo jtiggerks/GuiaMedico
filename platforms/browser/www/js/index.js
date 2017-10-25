@@ -27,6 +27,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("backbutton", ShowExitDialog, false);
     },
     // deviceready Event Handler
     //
@@ -44,3 +45,13 @@ var app = {
          
     }
 };
+
+ function ShowExitDialog() {
+        navigator.notification.confirm(
+                ("Gostaria de fechar o aplicativo?"), // message
+                alertexit, // callback
+                'My APp', // title
+                'YES,NO' // buttonName
+        );
+
+    }
