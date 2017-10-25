@@ -10,7 +10,8 @@
     $base = @mysql_connect($hostname, $username, $senha);
     
     $db = mysql_select_db($banco, $base);
- 
+    mysql_set_charset('utf8');
+
     $term = trim(strip_tags($_REQUEST['q']));
 
     $qstring = "SELECT nome,id,especialidade FROM medico WHERE id = ".$term;
@@ -25,6 +26,5 @@
         $row_set[] = $row; 
     }
 
-    echo json_encode($row_set);
-
+    echo json_encode($row_set,JSON_UNESCAPED_UNICODE);
 ?>

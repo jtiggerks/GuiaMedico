@@ -12,7 +12,8 @@
     $base = @mysql_connect($hostname, $username, $senha);
     
     $db = mysql_select_db($banco, $base);
- 
+    mysql_set_charset('utf8');
+
     $term = trim(strip_tags($_REQUEST['q']));
 
     $qstring = 'SELECT * FROM medico WHERE categoria like "%,'.$term.'%"';
@@ -28,7 +29,7 @@
         if(is_array($especialidade))
         {
             $especialidade_somada ='<p><b>Especialidade:</b> ';
-
+            $especialidade_somada_nome  = '';
             foreach($especialidade as $cada_especi)
             {   
                 if($cada_especi > 0)
@@ -66,6 +67,6 @@
         $row_set[] = $row; 
     }
 
-    echo json_encode($row_set);
+    echo json_encode($row_set,JSON_UNESCAPED_UNICODE);
 
 ?>

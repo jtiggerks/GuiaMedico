@@ -86,7 +86,7 @@
             
             <div class="titulo-header"></div> 
  
-            <img src="24c479ee2b3dc1a7acca50cbd5e83f6005medico1.jpg" />
+          
             
             <div class="boxlinha">
                 <div style="float: left;">
@@ -110,7 +110,7 @@
                 <div id="telefone1"></div>
                 <div id="telefone2"></div>
             </div>   
-
+            
             <div class="boxlinha">  
                 <div style="float: left;">
                     <i class="fa fa-address-book" aria-hidden="true"></i>
@@ -244,8 +244,8 @@
                         $.each( response, function ( i, val ) {
                             
                              $('.titulo-header').html('<i rel="categoria_page" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
-                             $('#endereco').empty().html(val.endereco);
-                             $('#telefone1').empty().html('<a href="tel:1435236805">'+val.telefone1+'</a>');
+                             $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+'</a>');
+                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+'</a>');
                              $('#telefone2').empty().html(val.telefone2);
                              $('#descricao').empty().html(val.descricao);
                              $('#especialidade').empty().html(val.especialidade);
