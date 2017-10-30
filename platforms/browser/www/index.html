@@ -158,7 +158,12 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript"> 
+    $(document).on('backbutton',
+         function(e){
+             e.preventDefault();
+             location.href="index.html";
+        });
         app.initialize();
 
     </script>
