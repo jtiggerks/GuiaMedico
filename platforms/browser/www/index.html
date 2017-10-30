@@ -87,35 +87,45 @@
             <div class="titulo-header"></div> 
  
           
-            
+            <div id="img_medico" style="    text-align: center;">
+                
+            </div>
             <div class="boxlinha">
-                <div style="float: left;">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+             <div style="padding:20px;">
+                <div style="float: left;  width: 14%; margin-right: 8%;">
+                    <img src="http://guiamedico.net.br/map.png" style="    width: 100%;">
                 </div>
 
-                <div id="endereco"></div>
+                <div id="endereco" style="float: left; width: 78%; "></div>
+             </div>
             </div>
+            <br clear="all">
 
             <div class="boxlinha" id="div_especialidade">
-                <div style="float: left;">
-                    <i class="fa fa-level-up" aria-hidden="true"></i>
+                 <div style="padding:20px;">
+                <div style="float: left;  width: 14%; margin-right: 8%;">
+                   <img src="http://guiamedico.net.br/route.png" style="    width: 100%;">
                 </div>
 
                 <div><div id="especialidade"></div></div>
+                </div>
             </div>
+            <br clear="all">
             <div class="boxlinha">   
-                <div style="float: left;">
-                    <i class="fa fa-phone" aria-hidden="true"></i>
+             <div style="padding:20px;">
+                <div style="float: left;  width: 14%; margin-right: 8%;">
+                     <img src="http://guiamedico.net.br/mobile-phone.png" style="    width: 100%;">   
                 </div>                     
                 <div id="telefone1"></div>
                 <div id="telefone2"></div>
+                </div>
             </div>   
-            
+            <br clear="all">     
             <div class="boxlinha" id="div_descricao">  
-                <div style="float: left;">
-                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                </div>                      
+             <div style="padding:20px;">
+                                     
                 <div id="descricao"></div>
+                </div>
             </div>
 
 
@@ -155,7 +165,7 @@
             var conteudohtml_centro = '';
             
             $.ajax({
-                url: "http://acelins.com.br/ap/categorias.php",
+                url: "http://guiamedico.net.br/ap/categorias.php",
                 dataType: "json",
                 crossDomain: true
             })
@@ -186,7 +196,7 @@
                     var $ul =  $("#lista_medico");
                     $ul.empty();
                     $.ajax({
-                        url: "http://www.acelins.com.br/ap/porcategoria.php",
+                        url: "http://guiamedico.net.br/ap/porcategoria.php",
                         dataType: "json",
                         crossDomain: true,
                         data: {
@@ -234,7 +244,7 @@
 
 
                     $.ajax({
-                        url: "http://www.acelins.com.br/ap/detalhemedico.php",
+                        url: "http://guiamedico.net.br/ap/detalhemedico.php",
                         dataType: "json",
                         crossDomain: true,
                         data: {
@@ -244,9 +254,12 @@
                     .then( function ( response ) {
                         $.each( response, function ( i, val ) {
                             
-                             $('.titulo-header').html('<i rel="categoria_page" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
-                             $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+' (Ver mapa)</a>');
-                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+' (Ligar)</a>');
+
+                             $('#img_medico').html('<img src="http://guiamedico.net.br/'+val.foto+'" style="width:100%;" />');
+                             
+                             $('.titulo-header').html('<i rel="home" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
+                             $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+'</a>');
+                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+' </a>');
                              $('#telefone2').empty().html(val.telefone2);
                              
                              
@@ -262,7 +275,7 @@
 
                              if(val.especialidade != '')
                              {
-                                $('#especialidade').empty().html('<b>Especialidade:</b><br>'+val.especialidade);
+                                $('#especialidade').empty().html(''+val.especialidade);
                                 $('#div_especialidade').show();
                              }else
                              {
@@ -290,7 +303,7 @@
                 if ( value && value.length > 2 ) {
                     
                     $.ajax({
-                        url: "http://www.acelins.com.br/ap/search.php",
+                        url: "http://guiamedico.net.br/ap/search.php",
                         dataType: "json",
                         crossDomain: true,
                         data: {

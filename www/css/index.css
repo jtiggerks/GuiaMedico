@@ -548,6 +548,7 @@ body {
 {
   color: #00a0ec;
   font-size: 14px;
+  margin-top: 4px;
 }
 
 
@@ -625,9 +626,13 @@ i.fa.fa-arrow-left
 
 .boxlinha
 {
-    padding: 30px;
+
     background-color: #fafcfd;
     font-size: 13pt;
     color: #333;
+    width: 100%;
+    float: left;
+    border-bottom: solid 3px #fff;
+    text-transform: capitalize;
 }
-.boxlinha div i {margin-right: 20px;}
+ 
