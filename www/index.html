@@ -31,6 +31,7 @@
 <body>
 <input type="hidden" id="pagina-atual" name="home">
 <input type="hidden" id="categoria-atual" name="categoria">
+<input type="hidden" id="categoria-atual2" name="categoria">
 
  <div class="header">
      <div class="menu-controls">
@@ -134,6 +135,13 @@
 
      <div id="categoria_page" style="display: none">  
             <div class="titulo-header"></div> 
+            <form>
+                <input type="text" class="text_class" id="busca_categoria" placeholder="Busque aqui" /> 
+                <!--<button type="submit" class="btn btn-busca">
+                    <i class="fa fa-search" aria-hidden="true"></i>  
+                </button> 
+                -->
+            </form>             
             <ul id="lista_medico"  class="lista_resultado" data-role="listview" ></ul>
 
      </div>
@@ -191,6 +199,7 @@
                     var html = '';
                     $('#pagina-atual').val('categoria_page'); 
                     $('#categoria-atual').val(rel2);
+                    $('#categoria-atual2').val(rel);
 
 
                     var $ul =  $("#lista_medico");
@@ -288,6 +297,76 @@
    
             });
  
+             $("#busca_categoria").keyup( function ( e, data ) {
+               
+                    var $ul =  $("#lista_medico"),
+                    $input = $(this),
+                    value = $input.val(),
+                    html = "";
+  
+
+                if ( value && value.length > 2 ) {
+                      
+                    $.ajax({
+                        url: "http://guiamedico.net.br/ap/search2.php",
+                        dataType: "json",
+                        crossDomain: true,
+                        data: {
+                            q: $input.val(),cat: $("#categoria-atual2").val()
+                        }
+                    })
+                    .then( function ( response ) {
+                        $.each( response, function ( i, val ) {
+                            if(val != '')
+                            {
+                                html += "<li>" + val.descricao + "</li>";
+                            }else
+                            {
+                               html = "<li>Nenhum resultado encontrado por '"+$input.val()+"'</li>";
+                            }                            
+                        });
+
+                        $ul.html(html); 
+                        
+                    });
+                } 
+
+
+                if (value.length == 0 ) {
+                
+                    var $ul =  $("#lista_medico");
+                    $ul.empty();
+                    $.ajax({
+                        url: "http://guiamedico.net.br/ap/porcategoria.php",
+                        dataType: "json",
+                        crossDomain: true,
+                        data: {
+                            q: rel
+                        }
+                    })
+                    .then( function ( response ) {
+                        $.each( response, function ( i, val ) {
+
+                            if(val != '')
+                            {
+                                html += "<li>" + val.descricao + "</li>";
+                            }else
+                            {
+                               html = "<li>Nenhum resultado encontrado por '"+rel2+"'</li>";
+                            }                            
+                        });
+
+                        $ul.html(html); 
+                        
+                    });
+
+
+                }
+
+
+            });
+
+
 
             $("#busca_medico").keyup( function ( e, data ) {
                
