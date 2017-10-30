@@ -610,7 +610,10 @@ body {
 
 i.fa.fa-arrow-left
 {
-  float: left;
+    float: left;
+    position: relative;
+    font-size: 40px;
+    margin-top: -8px;
 }
 
 .header h2{
