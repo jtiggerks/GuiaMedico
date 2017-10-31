@@ -252,8 +252,15 @@ function publicidade(categoria = 0)
             .then( function ( response ) {
                 $.each( response, function ( i, val ) {
                     if(val != '')
-                    {
-                        conteudohtml_centro += "<a class='class_categoria' rel2='" + val.nome + "' rel='"+ val.id +"'><i class='fa " + val.faicon + "' aria-hidden='true'></i> " + val.nome + "</a>";
+                    {   
+
+                        if(val.imagem != '')
+                        {
+                             conteudohtml_centro += "<a class='class_categoria' rel2='" + val.nome + "' rel='"+ val.id +"'><img style='  position: relative; top: 10px;  margin: 0 auto;' src='http://guiamedico.net.br/imagens/ads/" + val.imagem + "'/> " + val.nome + "</a>";  
+                        }else{
+                             conteudohtml_centro += "<a class='class_categoria' rel2='" + val.nome + "' rel='"+ val.id +"'><i class='fa " + val.faicon + "' aria-hidden='true'></i> " + val.nome + "</a>";     
+                        }
+
                     }else
                     {
                         conteudohtml_centro = "";
