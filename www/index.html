@@ -127,8 +127,9 @@
                 <div style="float: left;  width: 14%; margin-right: 8%;">
                      <img src="http://guiamedico.net.br/mobile-phone.png" style="    width: 100%;">   
                 </div>                     
-                <div id="telefone1"></div>
-                <div id="telefone2"></div>
+                <div id="telefone1"></div> 
+                <div id="telefone2"></div> 
+                <div id="telefone3"></div> 
                 </div>
             </div>   
             <br clear="all">     
@@ -348,8 +349,15 @@ function publicidade(categoria = 0)
                              
                              $('.titulo-header').html('<i rel="home" class="fa fa-arrow-left" aria-hidden="true"></i>'+"<div id='nomemedicotitulo'>"+val.nome+"</div>");
                              $('#endereco').empty().html('<a style="color:#333;" href="http://maps.google.com/?daddr='+val.endereco+',Lins SP">'+val.endereco+'</a>');
-                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:1435236805">'+val.telefone1+' </a>');
-                             $('#telefone2').empty().html(val.telefone2);
+                             
+                             if(val.telefone1 != null)
+                             $('#telefone1').empty().html('<a style="color:#333;" href="tel:'+val.telefone1+'">'+val.telefone1+' </a>');
+
+                             if(val.telefone2 != null)
+                                 $('#telefone2').empty().html('<a style="color:#333;" href="tel:'+val.telefone2+'">'+val.telefone2+' </a>');
+
+                             if(val.telefone3 != null)
+                                $('#telefone3').empty().html('<a style="color:#333;" href="tel:'+val.telefone3+'">'+val.telefone3+' </a>');
                              
                              
 
