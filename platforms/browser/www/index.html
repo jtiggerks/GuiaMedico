@@ -127,11 +127,19 @@
                 <div style="float: left;  width: 14%; margin-right: 8%;">
                      <img src="http://guiamedico.net.br/mobile-phone.png" style="    width: 100%;">   
                 </div>                     
-                <div id="telefone1"></div> 
-                <div id="telefone2"></div> 
+                <div id="telefone1"></div>
                 <div id="telefone3"></div> 
                 </div>
             </div>   
+            <br clear="all">
+            <div class="boxlinha" id="whatsappd">   
+             <div style="padding:20px;">
+                <div style="float: left;  width: 14%; margin-right: 8%;">
+                     <img src="http://guiamedico.net.br/whatsapp.png" style="    width: 100%;">   
+                </div>                     
+                <div id="telefone2"></div>
+                </div>
+            </div>             
             <br clear="all">     
             <div class="boxlinha" id="div_descricao">  
              <div style="padding:20px;">
@@ -353,11 +361,19 @@ function publicidade(categoria = 0)
                              if(val.telefone1 != null)
                              $('#telefone1').empty().html('<a style="color:#333;" href="tel:'+val.telefone1+'">'+val.telefone1+' </a>');
 
-                             if(val.telefone2 != null)
-                                 $('#telefone2').empty().html('<a style="color:#333;" href="tel:'+val.telefone2+'">'+val.telefone2+' </a>');
+                  
 
-                             if(val.telefone3 != null)
+                             if(val.telefone2 != '')
+                             {
+                                 $('#telefone2').empty().html('<a style="color:#333;" href="tel:'+val.telefone2+'">'+val.telefone2+' </a>');
+                                 $('#whatsappd').show();
+                             }else
+                                $('#whatsappd').hide();
+
+                             if(val.telefone3 != null)                             
                                 $('#telefone3').empty().html('<a style="color:#333;" href="tel:'+val.telefone3+'">'+val.telefone3+' </a>');
+ 
+                               
                              
                              
 
