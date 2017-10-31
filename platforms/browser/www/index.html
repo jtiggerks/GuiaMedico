@@ -68,7 +68,13 @@
     <div id="home">        
         <div id="centro_app_home">
             <form>
-                <input type="text" class="text_class" id="busca_medico" placeholder="Busque aqui seu Médico" /> 
+                <input type="text" class="text_class" id="busca_medico" placeholder="Busque aqui seu Médico"  /> 
+
+                  <div class="radios" style="    width: 100%; display: inline-block;text-align: center;">
+                  <input type="radio" id="radio1" name="radio" value="2" checked="checked">
+                  <label for="radio1">Por Nome</label>
+                  <input type="radio" id="radio2" name="radio" value="1"><label for="radio2">Por Especialidade</label></div>
+                
                 <!--<button type="submit" class="btn btn-busca">
                     <i class="fa fa-search" aria-hidden="true"></i>  
                 </button> 
@@ -141,6 +147,7 @@
             <div class="titulo-header"></div> 
             <form>
                 <input type="text" class="text_class" id="busca_categoria" placeholder="Busque aqui" /> 
+
                 <!--<button type="submit" class="btn btn-busca">
                     <i class="fa fa-search" aria-hidden="true"></i>  
                 </button> 
@@ -159,11 +166,43 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript"> 
+ 
+
+ 
+      
     $(document).on('backbutton',
          function(e){
              e.preventDefault();
-             location.href="index.html";
+
+            $("<div title='GUIA MÉDICO'></div>").dialog({
+               open: function(event, ui) { 
+                    $(this).html('<span style="text-align:"center;">Deseja fechar o aplicativo?.</span>'); 
+                    $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); 
+                },
+                show: { effect: "fade", duration: 300 },
+                buttons: [
+                {
+                text: "Sim",
+                  click: function() {
+                    $( this ).dialog("close");
+                    navigator.app.exitApp(); 
+                  }
+                },
+                {
+                     
+                  text: "Não",
+                  click: function() {
+                    $( this ).dialog("close");
+                    location.href="index.html";
+                    
+                  }
+              }
+              ]
+            }); 
+ 
         });
+
+
         app.initialize();
 
     </script>
@@ -403,7 +442,15 @@ function publicidade(categoria = 0)
 
 
             $("#busca_medico").keyup( function ( e, data ) {
-               
+                    
+
+                    if($("#radio1").is(":checked"))
+                       var  radi = 1;
+                    else
+                       var  radi = 2;
+
+          
+
                     var $ul =  $("#autocomplete"),
                     $input = $(this),
                     value = $input.val(),
@@ -420,7 +467,7 @@ function publicidade(categoria = 0)
                         dataType: "json",
                         crossDomain: true,
                         data: {
-                            q: $input.val()
+                            q: $input.val(), tipo : radi
                         }
                     })
                     .then( function ( response ) {

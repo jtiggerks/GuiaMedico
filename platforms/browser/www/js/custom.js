@@ -1,5 +1,26 @@
 (function ($) 
 {
+
+
+$(".radios").buttonset();
+
+function sem_Conexao(e){
+$("<div title='Sem conexão'></div>").dialog({
+   open: function(event, ui) { $(this).html('<span style="text-align:"center;">Conecte-se para utilizar esta função.</span>'); $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
+    show: { effect: "fade", duration: 300 },
+    buttons: [
+    {
+      text: "Voltar",
+      click: function() {
+        $( this ).dialog("close");
+        abre_Home();
+      }
+    }
+  ]
+}); 
+}
+
+
     
 $(document).ready(function() {
 
